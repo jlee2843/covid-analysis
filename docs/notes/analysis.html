@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; My sample book</title>
+    <title>Preliminary Data Analysis &#8212; MGH COVID-19 Study Data Analysis</title>
   
   
   
@@ -62,6 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notes/analysis';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="../introduction.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -144,20 +143,14 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="../introduction.html">
   
   
   
   
   
-    
-    
-      
-    
-    
-    <img src="../_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
   
+    <p class="title logo__title">MGH COVID-19 Study Data Analysis</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -175,13 +168,16 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction.html">
                     <no title>
                 </a>
             </li>
         </ul>
-        
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Preliminary Data Analysis</a></li>
+</ul>
+
     </div>
 </nav></div>
     </div>
@@ -234,7 +230,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+      <li><a href="https://github.com/jlee2843/covid-analysis" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -251,7 +247,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fnotes/analysis.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/jlee2843/covid-analysis/issues/new?title=Issue%20on%20page%20%2Fnotes/analysis.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -365,7 +361,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Preliminary Data Analysis</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -374,9 +370,9 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">1. Load Data</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -387,57 +383,25 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">readxl</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">ggpubr</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">lme4</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">broom</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">purrr</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>── <span class=" -Color -Color-Bold">Attaching core tidyverse packages</span> ──────────────────────── tidyverse 2.0.0 ──
-<span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">dplyr    </span> 1.1.4     <span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">readr    </span> 2.1.5
-<span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">forcats  </span> 1.0.0     <span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">stringr  </span> 1.5.1
-<span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">ggplot2  </span> 3.5.1     <span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">tibble   </span> 3.2.1
-<span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">lubridate</span> 1.9.3     <span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">tidyr    </span> 1.3.1
-<span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">purrr    </span> 1.0.2     
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>── <span class=" -Color -Color-Bold">Conflicts</span> ────────────────────────────────────────── tidyverse_conflicts() ──
-<span class=" -Color -Color-Red">✖</span> <span class=" -Color -Color-Blue">dplyr</span>::<span class=" -Color -Color-Green">filter()</span> masks <span class=" -Color -Color-Blue">stats</span>::filter()
-<span class=" -Color -Color-Red">✖</span> <span class=" -Color -Color-Blue">dplyr</span>::<span class=" -Color -Color-Green">lag()</span>    masks <span class=" -Color -Color-Blue">stats</span>::lag()
-<span class=" -Color -Color-Red">✖</span> <span class=" -Color -Color-Blue">dplyr</span>::<span class=" -Color -Color-Green">recode()</span> masks <span class=" -Color -Color-Blue">car</span>::recode()
-<span class=" -Color -Color-Red">✖</span> <span class=" -Color -Color-Blue">purrr</span>::<span class=" -Color -Color-Green">some()</span>   masks <span class=" -Color -Color-Blue">car</span>::some()
-<span class=" -Color -Color-Cyan">ℹ</span> Use the conflicted package (<span class=" -Color -Color-Blue">&lt;http://conflicted.r-lib.org/&gt;</span>) to force all conflicts to become errors
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>필요한 패키지를 로딩중입니다: Matrix
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>다음의 패키지를 부착합니다: ‘Matrix’
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The following objects are masked from ‘package:tidyr’:
-
-    expand, pack, unpack
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="preliminary-data-analysis">
+<h1>Preliminary Data Analysis<a class="headerlink" href="#preliminary-data-analysis" title="Link to this heading">#</a></h1>
+<section id="load-data">
+<h2>1. Load Data<a class="headerlink" href="#load-data" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">patient_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.delim</span><span class="p">(</span><span class="s">&quot;/Users/jennylee/Downloads/MGH_Olink_COVID_Apr_27_2021/MGH_COVID_Clinical_Info.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s">&quot;;&quot;</span><span class="p">)</span>
 <span class="nf">head</span><span class="p">(</span><span class="n">patient_df</span><span class="p">)</span>
-<span class="nf">tail</span><span class="p">(</span><span class="n">patient_df</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;This dataframe has &quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">patient_df</span><span class="p">),</span><span class="w"> </span><span class="s">&quot; rows in total.&quot;</span><span class="p">))</span>
+<span class="nf">glimpse</span><span class="p">(</span><span class="n">patient_df</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
 <caption>A data.frame: 6 × 44</caption>
@@ -454,23 +418,117 @@ document.write(`
 	<tr><th scope=row>6</th><td>6</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>⋯</td><td>4</td><td> 3</td><td> 5</td><td> 3</td><td> 3</td><td> 2</td><td> 1</td><td> 4</td><td> 5</td><td> 5</td></tr>
 </tbody>
 </table>
-</div><div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 6 × 44</caption>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;This dataframe has 384 rows in total.&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rows: 384
+Columns: 44
+$ subject_id      &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,…
+$ COVID           &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, …
+$ Age_cat         &lt;int&gt; 1, 2, 3, 1, 3, 1, 2, 4, 5, 2, 3, 2, 4, 4, 4, 3, 3, 2, …
+$ BMI_cat         &lt;int&gt; 4, 2, 4, 2, 3, 1, 2, 3, 2, 2, 2, 4, 4, 3, 2, 3, 1, 2, …
+$ HEART           &lt;int&gt; 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, …
+$ LUNG            &lt;int&gt; 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, …
+$ KIDNEY          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, …
+$ DIABETES        &lt;int&gt; 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, …
+$ HTN             &lt;int&gt; 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, …
+$ IMMUNO          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, …
+$ Resp_Symp       &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, …
+$ Fever_Sympt     &lt;int&gt; 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, …
+$ GI_Symp         &lt;int&gt; 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, …
+$ D0_draw         &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ D3_draw         &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, …
+$ D7_draw         &lt;int&gt; 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, …
+$ DE_draw         &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, …
+$ Acuity_0        &lt;int&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 5, 2, 3, 3, 2, 2, 4, 4, …
+$ Acuity_3        &lt;int&gt; 4, 3, 3, 3, 3, 3, 3, 3, 3, 4, 5, 2, 3, 2, 2, 2, 4, 4, …
+$ Acuity_7        &lt;int&gt; 5, 5, 5, 5, 3, 3, 5, 5, 5, 5, 5, 2, 5, 2, 2, 3, 5, 5, …
+$ Acuity_28       &lt;int&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 2, 1, 5, 5, 5, …
+$ Acuity_max      &lt;int&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 2, 3, 2, 1, 2, 4, 4, …
+$ abs_neut_0_cat  &lt;int&gt; 3, 3, 3, 2, 3, 3, 3, 5, 3, 1, 3, 3, 2, 3, 5, 4, 3, 3, …
+$ abs_lymph_0_cat &lt;int&gt; 2, 3, 3, 2, 5, 2, 2, 1, 2, 3, 3, 2, 3, 1, 1, 4, 3, 4, …
+$ abs_mono_0_cat  &lt;int&gt; 2, 3, 2, 2, 3, 1, 3, 4, 3, 2, 2, 2, 3, 2, 5, 3, 2, 1, …
+$ creat_0_cat     &lt;int&gt; 2, 2, 2, 2, 2, 2, 2, 2, 5, 1, 2, 1, 2, 4, 2, 3, 2, 1, …
+$ crp_0_cat       &lt;int&gt; 1, 3, 4, 1, 4, 3, 5, 2, 3, 1, NA, 5, 1, 4, 5, 1, 3, 2,…
+$ ddimer_0_cat    &lt;int&gt; 1, 2, 3, 2, 3, 3, 3, 3, 4, 1, NA, 2, 3, 3, 3, 4, 2, 2,…
+$ ldh_0_cat       &lt;int&gt; 2, 2, 4, 2, 3, 4, 3, 2, 5, 2, NA, 5, 2, 2, 3, 5, 4, 3,…
+$ Trop_72h        &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, …
+$ abs_neut_3_cat  &lt;int&gt; 2, 2, 3, 3, 3, 3, 3, 3, 2, 2, NA, 4, 2, 2, 5, 3, 3, 2,…
+$ abs_lymph_3_cat &lt;int&gt; 4, 4, 4, 4, 5, 4, 2, 3, 2, 3, NA, 1, 4, 2, 2, 1, 3, 4,…
+$ abs_mono_3_cat  &lt;int&gt; 2, 3, 3, 2, 2, 1, 2, 3, 2, 2, NA, 2, 3, 2, 2, 2, 3, 3,…
+$ creat_3_cat     &lt;int&gt; 1, 1, 2, 1, 1, 1, 2, 2, 3, 1, NA, 3, 1, 4, 1, 2, 1, 1,…
+$ crp_3_cat       &lt;int&gt; 1, 2, 3, 2, 5, 4, 4, 3, 3, NA, NA, 4, NA, 4, 3, NA, 3,…
+$ ddimer_3_cat    &lt;int&gt; 1, NA, 2, 2, 3, 3, 3, 2, 3, NA, NA, 4, NA, 2, 3, NA, 3…
+$ ldh_3_cat       &lt;int&gt; 1, NA, 3, 3, NA, 5, 3, 1, 2, NA, NA, 4, NA, 2, 2, NA, …
+$ abs_neut_7_cat  &lt;int&gt; NA, NA, NA, NA, 3, 3, NA, NA, NA, NA, NA, 3, NA, 2, 5,…
+$ abs_lymph_7_cat &lt;int&gt; NA, NA, NA, NA, 5, 3, NA, NA, NA, NA, NA, 3, NA, 1, 2,…
+$ abs_mono_7_cat  &lt;int&gt; NA, NA, NA, NA, 3, 2, NA, NA, NA, NA, NA, 3, NA, 2, 5,…
+$ creat_7_cat     &lt;int&gt; NA, NA, NA, NA, 1, 1, NA, NA, NA, NA, NA, 3, NA, 4, 1,…
+$ crp_7_cat       &lt;int&gt; NA, NA, NA, NA, 4, 4, NA, NA, NA, NA, NA, NA, NA, 1, N…
+$ ddimer_7_cat    &lt;int&gt; NA, NA, NA, NA, 4, 5, NA, NA, NA, NA, NA, 4, NA, 2, 4,…
+$ ldh_7_cat       &lt;int&gt; NA, NA, NA, NA, 3, 5, NA, NA, NA, NA, NA, 3, NA, 3, NA…
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">patient_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.delim</span><span class="p">(</span><span class="s">&quot;/Users/jennylee/Downloads/MGH_Olink_COVID_Apr_27_2021/MGH_COVID_OLINK_NPX.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s">&quot;;&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">patient_df</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;This dataframe has &quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">patient_df</span><span class="p">),</span><span class="w"> </span><span class="s">&quot; rows in total.&quot;</span><span class="p">))</span>
+<span class="nf">glimpse</span><span class="p">(</span><span class="n">patient_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A data.frame: 6 × 16</caption>
 <thead>
-	<tr><th></th><th scope=col>subject_id</th><th scope=col>COVID</th><th scope=col>Age_cat</th><th scope=col>BMI_cat</th><th scope=col>HEART</th><th scope=col>LUNG</th><th scope=col>KIDNEY</th><th scope=col>DIABETES</th><th scope=col>HTN</th><th scope=col>IMMUNO</th><th scope=col>⋯</th><th scope=col>crp_3_cat</th><th scope=col>ddimer_3_cat</th><th scope=col>ldh_3_cat</th><th scope=col>abs_neut_7_cat</th><th scope=col>abs_lymph_7_cat</th><th scope=col>abs_mono_7_cat</th><th scope=col>creat_7_cat</th><th scope=col>crp_7_cat</th><th scope=col>ddimer_7_cat</th><th scope=col>ldh_7_cat</th></tr>
-	<tr><th></th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>⋯</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+	<tr><th></th><th scope=col>SampleID</th><th scope=col>subject_id</th><th scope=col>Timepoint</th><th scope=col>Index</th><th scope=col>OlinkID</th><th scope=col>UniProt</th><th scope=col>Assay</th><th scope=col>MissingFreq</th><th scope=col>Panel</th><th scope=col>Panel_Lot_Nr</th><th scope=col>PlateID</th><th scope=col>QC_Warning</th><th scope=col>Assay_Warning</th><th scope=col>Normalization</th><th scope=col>LOD</th><th scope=col>NPX</th></tr>
+	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><th scope=row>379</th><td>381</td><td>0</td><td>3</td><td>3</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>⋯</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td></tr>
-	<tr><th scope=row>380</th><td>382</td><td>1</td><td>1</td><td>3</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>⋯</td><td> 4</td><td> 3</td><td> 3</td><td> 3</td><td> 1</td><td> 1</td><td> 1</td><td> 5</td><td> 3</td><td> 2</td></tr>
-	<tr><th scope=row>381</th><td>383</td><td>1</td><td>5</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>⋯</td><td>NA</td><td> 5</td><td> 3</td><td> 5</td><td> 2</td><td> 2</td><td> 3</td><td>NA</td><td>NA</td><td>NA</td></tr>
-	<tr><th scope=row>382</th><td>384</td><td>1</td><td>5</td><td>2</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>⋯</td><td> 3</td><td> 3</td><td> 2</td><td> 2</td><td> 2</td><td> 3</td><td> 2</td><td>NA</td><td>NA</td><td>NA</td></tr>
-	<tr><th scope=row>383</th><td>385</td><td>1</td><td>3</td><td>3</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>⋯</td><td> 2</td><td> 2</td><td> 2</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td></tr>
-	<tr><th scope=row>384</th><td>386</td><td>0</td><td>4</td><td>3</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>⋯</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td></tr>
+	<tr><th scope=row>1</th><td>1_D0</td><td>1</td><td>D0</td><td>56</td><td>OID21311</td><td>Q9BTE6</td><td>AARSD1 </td><td>0.0000</td><td>Oncology       </td><td>B04404</td><td>20200772_Plate5</td><td>PASS</td><td>PASS</td><td>Intensity</td><td>-1.0810</td><td> 1.9024</td></tr>
+	<tr><th scope=row>2</th><td>1_D0</td><td>1</td><td>D0</td><td>56</td><td>OID20921</td><td>Q96IU4</td><td>ABHD14B</td><td>0.0000</td><td>Neurology      </td><td>B04406</td><td>20200772_Plate5</td><td>PASS</td><td>PASS</td><td>Intensity</td><td>-1.4574</td><td>-0.2625</td></tr>
+	<tr><th scope=row>3</th><td>1_D0</td><td>1</td><td>D0</td><td>56</td><td>OID21280</td><td>P00519</td><td>ABL1   </td><td>0.0013</td><td>Oncology       </td><td>B04404</td><td>20200772_Plate5</td><td>PASS</td><td>PASS</td><td>Intensity</td><td>-2.4697</td><td> 0.2659</td></tr>
+	<tr><th scope=row>4</th><td>1_D0</td><td>1</td><td>D0</td><td>56</td><td>OID21269</td><td>P09110</td><td>ACAA1  </td><td>0.1248</td><td>Oncology       </td><td>B04404</td><td>20200772_Plate5</td><td>PASS</td><td>PASS</td><td>Intensity</td><td>-0.2027</td><td> 0.5311</td></tr>
+	<tr><th scope=row>5</th><td>1_D0</td><td>1</td><td>D0</td><td>56</td><td>OID20159</td><td>P16112</td><td>ACAN   </td><td>0.0000</td><td>Cardiometabolic</td><td>B04405</td><td>20200772_Plate5</td><td>PASS</td><td>PASS</td><td>Intensity</td><td>-3.3481</td><td>-2.0366</td></tr>
+	<tr><th scope=row>6</th><td>1_D0</td><td>1</td><td>D0</td><td>56</td><td>OID20105</td><td>Q9BYF1</td><td>ACE2   </td><td>0.0561</td><td>Cardiometabolic</td><td>B04405</td><td>20200772_Plate5</td><td>PASS</td><td>PASS</td><td>Intensity</td><td>-1.9055</td><td>-1.4261</td></tr>
 </tbody>
 </table>
-</div></div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;This dataframe has 1271808 rows in total.&quot;
+</pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rows: 1,271,808
+Columns: 16
+$ SampleID      &lt;chr&gt; &quot;1_D0&quot;, &quot;1_D0&quot;, &quot;1_D0&quot;, &quot;1_D0&quot;, &quot;1_D0&quot;, &quot;1_D0&quot;, &quot;1_D0&quot;, …
+$ subject_id    &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+$ Timepoint     &lt;chr&gt; &quot;D0&quot;, &quot;D0&quot;, &quot;D0&quot;, &quot;D0&quot;, &quot;D0&quot;, &quot;D0&quot;, &quot;D0&quot;, &quot;D0&quot;, &quot;D0&quot;, &quot;D…
+$ Index         &lt;int&gt; 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, …
+$ OlinkID       &lt;chr&gt; &quot;OID21311&quot;, &quot;OID20921&quot;, &quot;OID21280&quot;, &quot;OID21269&quot;, &quot;OID2015…
+$ UniProt       &lt;chr&gt; &quot;Q9BTE6&quot;, &quot;Q96IU4&quot;, &quot;P00519&quot;, &quot;P09110&quot;, &quot;P16112&quot;, &quot;Q9BYF…
+$ Assay         &lt;chr&gt; &quot;AARSD1&quot;, &quot;ABHD14B&quot;, &quot;ABL1&quot;, &quot;ACAA1&quot;, &quot;ACAN&quot;, &quot;ACE2&quot;, &quot;A…
+$ MissingFreq   &lt;dbl&gt; 0.0000, 0.0000, 0.0013, 0.1248, 0.0000, 0.0561, 0.8127, …
+$ Panel         &lt;chr&gt; &quot;Oncology&quot;, &quot;Neurology&quot;, &quot;Oncology&quot;, &quot;Oncology&quot;, &quot;Cardio…
+$ Panel_Lot_Nr  &lt;chr&gt; &quot;B04404&quot;, &quot;B04406&quot;, &quot;B04404&quot;, &quot;B04404&quot;, &quot;B04405&quot;, &quot;B0440…
+$ PlateID       &lt;chr&gt; &quot;20200772_Plate5&quot;, &quot;20200772_Plate5&quot;, &quot;20200772_Plate5&quot;,…
+$ QC_Warning    &lt;chr&gt; &quot;PASS&quot;, &quot;PASS&quot;, &quot;PASS&quot;, &quot;PASS&quot;, &quot;PASS&quot;, &quot;PASS&quot;, &quot;PASS&quot;, …
+$ Assay_Warning &lt;chr&gt; &quot;PASS&quot;, &quot;PASS&quot;, &quot;PASS&quot;, &quot;PASS&quot;, &quot;PASS&quot;, &quot;PASS&quot;, &quot;PASS&quot;, …
+$ Normalization &lt;chr&gt; &quot;Intensity&quot;, &quot;Intensity&quot;, &quot;Intensity&quot;, &quot;Intensity&quot;, &quot;Int…
+$ LOD           &lt;dbl&gt; -1.0810, -1.4574, -2.4697, -0.2027, -3.3481, -1.9055, 0.…
+$ NPX           &lt;dbl&gt; 1.9024, -0.2625, 0.2659, 0.5311, -2.0366, -1.4261, -0.24…
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -502,6 +560,15 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../introduction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -517,9 +584,9 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">1. Load Data</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
@@ -533,7 +600,7 @@ document.write(`
   <div class="footer-item">
     
 <p class="component-author">
-By The Jupyter Book Community
+By Jenny Lee
 </p>
 
   </div>
