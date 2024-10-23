@@ -1,4 +1,4 @@
 format: jb-book
-root: intro
-chapters:
-- file: notes/analysis
+root: notes/analysis
+# chapters:
+# - file: notes/analysis
