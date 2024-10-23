@@ -1,0 +1,48 @@
+Traceback (most recent call last):
+  File "/Users/jennylee/miniforge3/envs/mds574/lib/python3.11/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/jennylee/miniforge3/envs/mds574/lib/python3.11/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jennylee/miniforge3/envs/mds574/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jennylee/miniforge3/envs/mds574/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/jennylee/miniforge3/envs/mds574/lib/python3.11/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/Users/jennylee/miniforge3/envs/mds574/lib/python3.11/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/jennylee/miniforge3/envs/mds574/lib/python3.11/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+count_unique_entries_per_patient <- function(data, col_name) {
+      result <- data |>
+            group_by(subject_id) |>
+            summarise(
+                  !!paste0("unique_", col_name) := n_distinct(.data[[col_name]])
+            )
+      print(paste0("Total number of unique ", col_name, " entries is: ", length(unique(result[[paste0("unique_", col_name)]]))))
+
+      return(result)
+}
+
+head(count_unique_entries_per_patient(join_df, "UniProt"))
+------------------
+
+
+Error in h(simpleError(msg, call)): 함수 'head'를 위한 메소드 선택시 인수 'x'를 평가하는데 오류가 발생했습니다: 객체 'join_df'를 찾을 수 없습니다
+Traceback:
+
+1. head(count_unique_entries_per_patient(join_df, "UniProt"))
+2. count_unique_entries_per_patient(join_df, "UniProt")
+3. summarise(group_by(data, subject_id), `:=`(!!paste0("unique_", 
+ .     col_name), n_distinct(.data[[col_name]])))   # at line 2-6 of file <text>
+4. group_by(data, subject_id)
+5. .handleSimpleError(function (cond) 
+ . .Internal(C_tryCatchHelper(addr, 1L, cond)), "객체 'join_df'를 찾을 수 없습니다", 
+ .     base::quote(eval(expr, envir, enclos)))
+6. h(simpleError(msg, call))
+
