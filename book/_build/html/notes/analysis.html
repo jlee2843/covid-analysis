@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Data Analysis on MGH COVID-19 Study Data &#8212; MGH COVID-19 Study Data Analysis</title>
+    <title>Report on MGH COVID-19 Study Analysis &#8212; MGH COVID-19 Study Data Analysis</title>
   
   
   
@@ -167,7 +167,7 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Analysis on MGH COVID-19 Study Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Report on MGH COVID-19 Study Analysis</a></li>
 </ul>
 
     </div>
@@ -353,7 +353,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Data Analysis on MGH COVID-19 Study Data</h1>
+    <h1>Report on MGH COVID-19 Study Analysis</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -403,11 +403,14 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="data-analysis-on-mgh-covid-19-study-data">
-<h1>Data Analysis on MGH COVID-19 Study Data<a class="headerlink" href="#data-analysis-on-mgh-covid-19-study-data" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="report-on-mgh-covid-19-study-analysis">
+<h1>Report on MGH COVID-19 Study Analysis<a class="headerlink" href="#report-on-mgh-covid-19-study-analysis" title="Link to this heading">#</a></h1>
 <p><img alt="image" src="../_images/vaccine.jpg" /></p>
-<p>This report has been prepared as part of the hiring process for Olink Proteomics. The dataset utilized for this analysis has been sourced from Olink’s study site.</p>
+<div class="admonition-disclaimer admonition">
+<p class="admonition-title">Disclaimer</p>
+<p>This report has been prepared as part of the hiring process for Olink Proteomics. The dataset utilized for this analysis has been sourced from <a class="reference external" href="https://info.olink.com/mgh-covid-study-overview-page">Olink’s MGH COVID-19 study site</a>.</p>
 <p>For the sake of clarity and ease of reading, most code cells have been collapsed. To view the code, simply expand the drop-down sections.</p>
+</div>
 <section id="load-data">
 <h2>1. Load Data<a class="headerlink" href="#load-data" title="Link to this heading">#</a></h2>
 <p>This section of the report provides an overview of the preliminary data analysis procedures. The steps involved include loading the dataset, followed by a thorough inspection of its structure to assess key characteristics such as data types, missing values, and overall organization.</p>
@@ -656,7 +659,12 @@ $ NPX           &lt;dbl&gt; 1.9024, -0.2625, 0.2659, 0.5311, -2.0366, -1.4261, -
 </table>
 </div></div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">rows_before_drop</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">protein_df</span><span class="p">)</span>
 <span class="n">protein_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">protein_df</span><span class="w"> </span><span class="o">|&gt;</span>
@@ -668,6 +676,7 @@ $ NPX           &lt;dbl&gt; 1.9024, -0.2625, 0.2659, 0.5311, -2.0366, -1.4261, -
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;In total, 117760 rows have been dropped.&quot;
 </pre></div>
@@ -680,7 +689,12 @@ $ NPX           &lt;dbl&gt; 1.9024, -0.2625, 0.2659, 0.5311, -2.0366, -1.4261, -
 </section>
 <section id="join-the-two-data-frames">
 <h3>1.2 Join the Two Data Frames<a class="headerlink" href="#join-the-two-data-frames" title="Link to this heading">#</a></h3>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">join_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">inner_join</span><span class="p">(</span><span class="n">patient_df</span><span class="p">,</span><span class="w"> </span><span class="n">protein_df</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="s">&quot;subject_id&quot;</span><span class="p">)</span>
 <span class="nf">nrow</span><span class="p">(</span><span class="n">join_df</span><span class="p">)</span>
@@ -688,6 +702,7 @@ $ NPX           &lt;dbl&gt; 1.9024, -0.2625, 0.2659, 0.5311, -2.0366, -1.4261, -
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output text_html">1154048</div><div class="output text_html"><table class="dataframe">
 <caption>A data.frame: 6 × 59</caption>
@@ -709,13 +724,19 @@ $ NPX           &lt;dbl&gt; 1.9024, -0.2625, 0.2659, 0.5311, -2.0366, -1.4261, -
 </section>
 <section id="number-of-unique-proteins-per-patient">
 <h3>1.3 Number of Unique Proteins per Patient<a class="headerlink" href="#number-of-unique-proteins-per-patient" title="Link to this heading">#</a></h3>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">num_patient</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">patient_df</span><span class="o">$</span><span class="n">subject_id</span><span class="p">))</span>
 <span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;The study involves a total of &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">num_patient</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; unique patients.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output text_html">'The study involves a total of 384 unique patients.'</div></div>
 </div>
@@ -761,12 +782,18 @@ $ NPX           &lt;dbl&gt; 1.9024, -0.2625, 0.2659, 0.5311, -2.0366, -1.4261, -
 </table>
 </div></div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="nf">count_unique_entries_per_patient</span><span class="p">(</span><span class="n">join_df</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Assay&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Total number of unique Assay entries is: 1&quot;
 </pre></div>
@@ -788,7 +815,7 @@ $ NPX           &lt;dbl&gt; 1.9024, -0.2625, 0.2659, 0.5311, -2.0366, -1.4261, -
 </table>
 </div></div>
 </div>
-<p>We can confidently state that a total of 384 patients were tested for the presence and NPX levels of 1463 unique proteins. Notably, the number of unique entries identified in both the <code class="docutils literal notranslate"><span class="pre">UniProt</span></code> and <code class="docutils literal notranslate"><span class="pre">Assay</span></code> columns is equal, indicating a consistent representation of proteins across these two columns.</p>
+<p>We can confidently state that a total of 384 patients were tested for the presence of COVID-19 virus and measured NPX levels of 1463 unique proteins. Notably, the number of unique entries identified in both the <code class="docutils literal notranslate"><span class="pre">UniProt</span></code> and <code class="docutils literal notranslate"><span class="pre">Assay</span></code> columns is equal (1493), indicating a consistent representation of proteins across these two columns.</p>
 </section>
 </section>
 <section id="statistical-testing">
@@ -820,7 +847,12 @@ $ NPX           &lt;dbl&gt; 1.9024, -0.2625, 0.2659, 0.5311, -2.0366, -1.4261, -
 </ul>
 <section id="checking-for-the-homotenity-of-variances-using-levene-s-test">
 <h5>2.1.2.1 Checking for the homotenity of variances using Levene’s Test<a class="headerlink" href="#checking-for-the-homotenity-of-variances-using-levene-s-test" title="Link to this heading">#</a></h5>
-<div class="cell docutils container">
+<div class="cell tag_scroll-output tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">join_df</span><span class="o">$</span><span class="n">COVID</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.factor</span><span class="p">(</span><span class="n">join_df</span><span class="o">$</span><span class="n">COVID</span><span class="p">)</span>
 
@@ -841,6 +873,7 @@ $ NPX           &lt;dbl&gt; 1.9024, -0.2625, 0.2659, 0.5311, -2.0366, -1.4261, -
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
 <caption>A data.frame: 6 × 5</caption>
@@ -1137,7 +1170,12 @@ $ NPX           &lt;dbl&gt; 1.9024, -0.2625, 0.2659, 0.5311, -2.0366, -1.4261, -
 </section>
 <section id="checking-for-normality-using-shapiro-wilk-test">
 <h5>2.1.2.2 Checking for normality using Shapiro-Wilk test<a class="headerlink" href="#checking-for-normality-using-shapiro-wilk-test" title="Link to this heading">#</a></h5>
-<div class="cell docutils container">
+<div class="cell tag_hide-input tag_scroll-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">normality_results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">join_df</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="w">  </span><span class="nf">group_by</span><span class="p">(</span><span class="n">UniProt</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
@@ -1156,6 +1194,7 @@ $ NPX           &lt;dbl&gt; 1.9024, -0.2625, 0.2659, 0.5311, -2.0366, -1.4261, -
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
 <caption>A data.frame: 6 × 4</caption>
@@ -1182,14 +1221,24 @@ $ NPX           &lt;dbl&gt; 1.9024, -0.2625, 0.2659, 0.5311, -2.0366, -1.4261, -
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">filter_for_proteins</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">intersect</span><span class="p">(</span><span class="n">homogenity_list</span><span class="p">,</span><span class="w"> </span><span class="n">normality_list</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">&quot;The list of proteins that passed all assumptions are:&quot;</span><span class="p">)</span>
 <span class="n">filter_for_proteins</span>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;The list of proteins that passed all assumptions are:&quot;
+</pre></div>
+</div>
 <div class="output text_html"><style>
 .list-inline {list-style: none; margin:0; padding: 0}
 .list-inline>li {display: inline-block}
@@ -1198,7 +1247,12 @@ $ NPX           &lt;dbl&gt; 1.9024, -0.2625, 0.2659, 0.5311, -2.0366, -1.4261, -
 <ol class=list-inline><li>'O43557'</li><li>'P05121'</li><li>'P08571'</li><li>'P09603'</li><li>'P18428'</li><li>'P20062'</li><li>'P21709'</li><li>'P26951'</li><li>'P27487'</li><li>'P28908'</li><li>'P35247'</li><li>'P35968'</li><li>'P42830'</li><li>'P50591'</li><li>'P51671'</li><li>'P52789'</li><li>'P55773'</li><li>'P78333'</li><li>'P78552'</li><li>'P80075'</li><li>'Q13093'</li><li>'Q15846'</li><li>'Q6UXB2'</li><li>'Q6UXH9'</li><li>'Q86SR1'</li><li>'Q96J42'</li><li>'Q96JA1'</li><li>'Q99727'</li><li>'Q9GZM7'</li><li>'Q9HAV7'</li><li>'Q9NP70'</li><li>'Q9NZC2'</li><li>'Q9UIB8'</li><li>'Q9Y266'</li><li>'Q9Y4X3'</li></ol>
 </div></div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">filtered_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">join_df</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="w">      </span><span class="nf">filter</span><span class="p">(</span><span class="n">UniProt</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">filter_for_proteins</span><span class="p">)</span>
@@ -1208,6 +1262,7 @@ $ NPX           &lt;dbl&gt; 1.9024, -0.2625, 0.2659, 0.5311, -2.0366, -1.4261, -
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 27440
 </pre></div>
@@ -1328,12 +1383,16 @@ Caused by warning:
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">top_10_proteins</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">protein_t_test_df</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="w">      </span><span class="nf">slice_head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="w">      </span><span class="nf">pull</span><span class="p">(</span><span class="n">UniProt</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">&quot;Top 10 proteins with largest effect size values are:&quot;</span><span class="p">)</span>
 <span class="n">top_10_proteins</span>
 </pre></div>
 </div>
 </div>
 </details>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Top 10 proteins with largest effect size values are:&quot;
+</pre></div>
+</div>
 <div class="output text_html"><style>
 .list-inline {list-style: none; margin:0; padding: 0}
 .list-inline>li {display: inline-block}
